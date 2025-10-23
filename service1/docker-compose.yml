@@ -45,7 +45,7 @@ services:
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=adnan
       - ME_CONFIG_MONGODB_ADMINPASSWORD=adnan
-      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_SERVER=invilensMongodb
 
 volumes:
   invilensData1:

@@ -1,0 +1,56 @@
+services:
+  invilensData1:
+    container_name: invilens_postgres
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: invilensdb
+    volumes:
+      - invilensData1:/var/lib/postgres/data
+    ports:
+      - 5433:5432
+
+
+  invilensPgadmin:
+    container_name: invilens_pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - invilensPgadmin:/var/lib/pgadmin
+    ports:
+      - 5051:80
+    restart: unless-stopped
+
+  invilensMongodb:
+    container_name: invilens_mongodb
+    image: mongo
+    ports:
+      - 27018:27017
+    volumes:
+      - invilensMongodb:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=adnan
+      - MONGO_INITDB_ROOT_PASSWORD=adnan
+
+  invilensMongo-express:
+    container_name: invilens_mongo_express
+    image: mongo-express
+    restart: unless-stopped
+    ports:
+      - 8082:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=adnan
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=adnan
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+
+volumes:
+  invilensData1:
+    driver: local
+  invilensPgadmin:
+    driver: local
+  invilensMongodb:
+    driver: local

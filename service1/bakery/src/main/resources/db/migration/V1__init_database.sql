@@ -1,20 +1,22 @@
+-- CATEGORY TABLE
 create table if not exists category
 (
-    id integer not null primary key,
+    id integer generated always as identity primary key,
     description varchar(255),
     name varchar(255)
 );
 
+-- BAKERY TABLE
 create table if not exists bakery
 (
-     id integer not null primary key,
+     id integer generated always as identity primary key,
      description varchar(255),
      name varchar(255),
      weight varchar(255),
      available_quantity double precision not null,
      price numeric(38, 2),
      category_id integer
-            constraint fk1slkfje8rou8cmn references category
+         constraint fk1slkfje8rou8cmn references category
 );
 
 drop sequence if exists category_seq;

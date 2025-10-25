@@ -15,15 +15,10 @@ public class Bakery {
     private Integer id;
 
     private String description;
-
     private String name;
-
     private String weight;
-
     private Double availableQuantity;
-
     private BigDecimal price;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

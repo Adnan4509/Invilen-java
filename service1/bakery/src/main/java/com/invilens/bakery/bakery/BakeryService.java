@@ -1,7 +1,7 @@
 package com.invilens.bakery.bakery;
 
 import com.invilens.bakery.dto.*;
-import jakarta.validation.Valid;
+import com.invilens.bakery.exception.ProductPurchaseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class BakeryService {
         return Mapper.toResponse(bakeryRepository.findById(id).orElseThrow());
     }
 
-    public void purchaseProduct(List<PurchaseRequest> request) {
+    public List<PurchaseResponse> purchaseProduct(List<PurchaseRequest> request) {
         var productsIds = request
                 .stream()
                 .map(PurchaseRequest::productId)
@@ -60,7 +60,7 @@ public class BakeryService {
             bakeryRepository.save(product);
             purchasedProducts.add(Mapper.toPurchaseResponse(product, productRequest.quantity()));
         }
-//        return purchasedProducts;
+        return purchasedProducts;
 
     }
 }

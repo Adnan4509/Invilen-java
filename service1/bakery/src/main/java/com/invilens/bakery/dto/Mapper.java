@@ -28,6 +28,12 @@ public class Mapper {
     }
 
     public static PurchaseResponse toPurchaseResponse(Bakery product, double quantity) {
-
+        return new PurchaseResponse(
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+                product.getPrice(),
+                quantity
+        );
     }
 }

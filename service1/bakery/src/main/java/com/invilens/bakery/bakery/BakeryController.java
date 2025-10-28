@@ -3,6 +3,7 @@ package com.invilens.bakery.bakery;
 import com.invilens.bakery.dto.BakeryRequest;
 import com.invilens.bakery.dto.BakeryResponse;
 import com.invilens.bakery.dto.PurchaseRequest;
+import com.invilens.bakery.dto.PurchaseResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +34,9 @@ public class BakeryController {
     }
 
     @PostMapping("/purchase")
-    public void bakeryPurchase(
+    public List<PurchaseResponse> bakeryPurchase(
             @RequestBody @Valid List<PurchaseRequest> purchaseRequest) {
-        bakeryService.purchaseProduct(purchaseRequest);
+        return bakeryService.purchaseProduct(purchaseRequest);
     }
 
 }

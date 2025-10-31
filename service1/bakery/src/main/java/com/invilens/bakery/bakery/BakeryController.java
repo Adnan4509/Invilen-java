@@ -6,6 +6,7 @@ import com.invilens.bakery.dto.PurchaseRequest;
 import com.invilens.bakery.dto.PurchaseResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +25,11 @@ public class BakeryController {
     }
 
     @GetMapping
-    public List<BakeryResponse> findAll(){
-        return bakeryService.allProducts();
+    public Page<BakeryResponse> findAll(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize
+    ){
+        return bakeryService.allProducts(pageNumber, pageSize);
     }
 
     @GetMapping("/{id}")

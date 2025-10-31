@@ -3,6 +3,9 @@ package com.invilens.bakery.bakery;
 import com.invilens.bakery.dto.*;
 import com.invilens.bakery.exception.ProductPurchaseException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,11 +23,10 @@ public class BakeryService {
         return product.getId();
     }
 
-    public List<BakeryResponse> allProducts() {
-        return bakeryRepository.findAll()
-                .stream()
-                .map(Mapper::toResponse)
-                .collect(Collectors.toList());
+    public Page<BakeryResponse> allProducts(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return bakeryRepository.findAll(pageable)
+                .map(Mapper::toResponse);
     }
 
     public BakeryResponse findById(Integer id) {

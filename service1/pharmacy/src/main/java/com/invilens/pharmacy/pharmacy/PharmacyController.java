@@ -30,4 +30,13 @@ public class PharmacyController {
     ) {
         return pharmacyService.findAll(pageNumber, pageSize);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PharmacyResponse> findById(
+            @PathVariable Integer id
+    ) {
+        return pharmacyService.findByid(id);
+    }
+
+
 }

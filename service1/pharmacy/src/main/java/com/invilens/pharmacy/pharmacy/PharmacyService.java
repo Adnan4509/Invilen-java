@@ -29,4 +29,9 @@ public class PharmacyService {
         return repository.findAll(pageable)
                 .map(Mapper::toResponse);
     }
+
+    public ResponseEntity<PharmacyResponse> findByid(Integer id) {
+
+       return ResponseEntity.ok(mapper.toResponse(repository.findById(id).orElseThrow()));
+    }
 }

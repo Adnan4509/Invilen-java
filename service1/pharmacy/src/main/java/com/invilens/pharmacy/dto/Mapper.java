@@ -32,4 +32,15 @@ public class Mapper {
                 medicine.getCategory()
         );
     }
+
+    public PurchaseResponse toPurchaseResponse(Medicine product, double quantity) {
+        return new PurchaseResponse(
+                product.getId(),
+                product.getName(),
+                product.getBrand(),
+                quantity,
+                product.getPrice(),
+                product.getExpiry_date()
+        );
+    }
 }

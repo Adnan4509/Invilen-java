@@ -2,11 +2,15 @@ package com.invilens.pharmacy.pharmacy;
 
 import com.invilens.pharmacy.dto.PharmacyRequest;
 import com.invilens.pharmacy.dto.PharmacyResponse;
+import com.invilens.pharmacy.dto.PurchaseRequest;
+import com.invilens.pharmacy.dto.PurchaseResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -38,5 +42,9 @@ public class PharmacyController {
         return pharmacyService.findByid(id);
     }
 
+    @PostMapping("/purchase")
+    public List<PurchaseResponse> purchaseProduct(List<PurchaseRequest> request) {
+        return pharmacyService.ProductPurchased(request);
+    }
 
 }

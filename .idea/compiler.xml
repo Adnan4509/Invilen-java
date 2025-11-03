@@ -19,7 +19,7 @@
         </processorPath>
         <module name="customer" />
       </profile>
-      <profile name="Annotation profile for pharmacy" enabled="true">
+      <profile name="Annotation profile for order" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -28,6 +28,7 @@
         </processorPath>
         <module name="pharmacy" />
         <module name="bakery" />
+        <module name="order" />
       </profile>
     </annotationProcessing>
   </component>
@@ -37,6 +38,7 @@
       <module name="config-server" options="-parameters" />
       <module name="customer" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
+      <module name="order" options="-parameters" />
       <module name="pharmacy" options="-parameters" />
     </option>
   </component>

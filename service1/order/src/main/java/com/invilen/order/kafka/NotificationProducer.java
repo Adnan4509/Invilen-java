@@ -20,5 +20,6 @@ public class NotificationProducer {
                 .setHeader(KafkaHeaders.TOPIC, "order-topic")
                 .build();
         kafkaTemplate.send(message);
+        System.out.println("successfully send to kafka");
     }
 }

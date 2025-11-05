@@ -13,4 +13,13 @@ public class OrderMapper {
                 order.getCustomerId()
         );
     }
+
+    public Order toOrder(OrderRequest request) {
+        Order order = new Order();
+        order.setId(request.id());
+        order.setReference(request.reference());
+        order.setCustomerId(request.customerId());
+        order.setTotalAmount(request.amount());
+        return order;
+    }
 }

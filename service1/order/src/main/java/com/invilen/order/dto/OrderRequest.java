@@ -1,11 +1,13 @@
 package com.invilen.order.dto;
 
+import com.invilen.order.order.PurchaseRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 public record OrderRequest(
@@ -18,8 +20,8 @@ public record OrderRequest(
         @NotNull(message = "Customer should be present")
         @NotEmpty(message = "Customer should be present")
         @NotBlank(message = "Customer should be present")
-        String customerId
-//        @NotEmpty(message = "You should at least purchase one product")
-//        List<PurchaseRequest> products
+        String customerId,
+        @NotEmpty(message = "You should at least purchase one product")
+        List<PurchaseRequest> products
 ) {
 }

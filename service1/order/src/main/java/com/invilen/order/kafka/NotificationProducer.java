@@ -21,5 +21,4 @@ public class NotificationProducer {
                 .build();
         kafkaTemplate.send(message);
     }
-
 }

@@ -1,6 +1,7 @@
 package com.invilen.notification.kafkaConsumer;
 
 import com.invilen.notification.dto.OrderConfirmation;
+import com.invilen.notification.email.EmailService;
 import com.invilen.notification.notification.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;

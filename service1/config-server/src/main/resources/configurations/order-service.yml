@@ -24,4 +24,4 @@ application:
   config:
     customer-url: http://localhost:8090/api/customer
     bakery-url: http://localhost:8050/api/bakery
-    pharmacy-url: http://localhost:8020/api/pharmacy
+    pharmacy-url: http://localhost:8020/api/pharmacy/purchase

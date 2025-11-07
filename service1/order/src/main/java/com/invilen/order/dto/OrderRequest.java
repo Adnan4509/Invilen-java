@@ -1,6 +1,6 @@
 package com.invilen.order.dto;
 
-import com.invilen.order.order.PurchaseRequest;
+import com.invilen.order.product.PurchaseRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

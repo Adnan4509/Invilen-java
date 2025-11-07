@@ -43,7 +43,7 @@ public class PharmacyController {
     }
 
     @PostMapping("/purchase")
-    public List<PurchaseResponse> purchaseProduct(List<PurchaseRequest> request) {
+    public List<PurchaseResponse> purchaseProduct(@RequestBody List<PurchaseRequest> request) {
         return pharmacyService.ProductPurchased(request);
     }
 

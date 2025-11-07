@@ -1,7 +1,7 @@
 package com.invilen.order.product;
 
-import com.invilen.order.order.PurchaseRequest;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -10,5 +10,6 @@ import java.util.List;
         url = "${application.config.pharmacy-url}"
 )
 public interface ProductClient {
-    public List<PurchaseResponse> puchaseProduct(List<PurchaseRequest> request);
+    @PostMapping
+    public List<PurchaseResponse> purchaseProduct(List<PurchaseRequest> request);
 }

@@ -9,14 +9,12 @@ import com.invilen.order.kafka.OrderConfirmation;
 import com.invilen.order.orderItem.OrderItemMapper;
 import com.invilen.order.orderItem.OrderItemRepository;
 import com.invilen.order.product.ProductClient;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.invilen.order.product.PurchaseRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -46,9 +44,11 @@ public class OrderService {
         var customer = customerClient.findCustomerById(request.customerId());
         System.out.println(customer);
 //        step-2: product purchase from product ms
-        var purchasedProducts = productClient.puchaseProduct(request.products());
+        var purchasedProducts = productClient.purchaseProduct(request.products());
+        System.out.println(purchasedProducts);
 //        step-3:save order
         var order = repository.save(mapper.toOrder(request));
+        System.out.println(order);
 //        step-4: save order items
         for(PurchaseRequest purchaseRequest: request.products()) {
             var orderItem = itemRepository.save(itemMapper.toOrderItem(purchaseRequest, order));
@@ -61,6 +61,6 @@ public class OrderService {
                 request.amount()
         );
         notificationProducer.sendOrderConfirmation(orderConfirmation);
-        return null;
+        return order.getId();
     }
 }

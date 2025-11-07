@@ -1,7 +1,7 @@
 package com.invilens.pharmacy.dto;
 
 public record PurchaseRequest(
-        Integer id,
+        Integer productId,
         Double quantity
 ) {
 }

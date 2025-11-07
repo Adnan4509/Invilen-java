@@ -39,7 +39,7 @@ public class PharmacyService {
     public List<PurchaseResponse> ProductPurchased(List<PurchaseRequest> request) {
         var productIds = request
                 .stream()
-                .map(PurchaseRequest::id)
+                .map(PurchaseRequest::productId)
                 .toList();
         var storedProducts = repository.findAllById(productIds)
                 .stream()
@@ -50,7 +50,7 @@ public class PharmacyService {
         }
         var sortedRequest = request
                 .stream()
-                .sorted(Comparator.comparing(PurchaseRequest::id))
+                .sorted(Comparator.comparing(PurchaseRequest::productId))
                 .toList();
         var purchasedProducts = new ArrayList<PurchaseResponse>();
         for(int i=0; i<storedProducts.size(); i++) {

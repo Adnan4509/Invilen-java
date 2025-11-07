@@ -8,5 +8,6 @@ public record PurchaseResponse(
         String brand,
         Double quantity,
         BigDecimal price,
-        LocalDate expiry_date) {
+        LocalDate expiry_date
+) {
 }

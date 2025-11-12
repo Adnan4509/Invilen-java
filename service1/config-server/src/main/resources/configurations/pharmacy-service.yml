@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql:${POSTGRES_URL://localhost:5433/pharmacydb}
+    url: jdbc:postgresql:${POSTGRES_CONTAINER://localhost:5433/pharmacydb}
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver

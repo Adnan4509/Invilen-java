@@ -1,5 +1,6 @@
 package com.invilen.order.order;
 
+import com.invilen.order.dto.OrderReport;
 import com.invilen.order.dto.OrderRequest;
 import com.invilen.order.dto.OrderResponse;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -30,6 +32,12 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<Integer> createOrder(@RequestBody OrderRequest request) {
         return ResponseEntity.ok(orderService.createOrder(request));
+    }
+
+    @GetMapping("/dailyReport")
+    public List<OrderReport> dailySalesReport(@RequestParam(required = false) LocalDateTime start,
+                                              @RequestParam(required = false) LocalDateTime end) {
+        return orderService.dailySalesReport(start, end);
     }
 
 }

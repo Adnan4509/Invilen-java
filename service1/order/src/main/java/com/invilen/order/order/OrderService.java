@@ -2,6 +2,7 @@ package com.invilen.order.order;
 
 import com.invilen.order.customer.CustomerClient;
 import com.invilen.order.dto.OrderMapper;
+import com.invilen.order.dto.OrderReport;
 import com.invilen.order.dto.OrderRequest;
 import com.invilen.order.dto.OrderResponse;
 import com.invilen.order.kafka.NotificationProducer;
@@ -15,6 +16,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -44,7 +50,7 @@ public class OrderService {
         var customer = customerClient.findCustomerById(request.customerId());
         System.out.println(customer);
 //        step-2: product purchase from product ms
-        var purchasedProducts = productClient.purchaseProduct(request.products());
+        var purchasedProducts = productClient.purchasePharmacyProduct(request.products());
         System.out.println(purchasedProducts);
 //        step-3:save order
         var order = repository.save(mapper.toOrder(request));
@@ -62,5 +68,22 @@ public class OrderService {
         );
         notificationProducer.sendOrderConfirmation(orderConfirmation);
         return order.getId();
+    }
+
+    public List<OrderReport> dailySalesReport(LocalDateTime start, LocalDateTime end) {
+        if(start==null) {
+            start = LocalDate.now().atStartOfDay();
+            System.out.println(start);
+        }
+        if(end == null) {
+            end = LocalDate.now().atTime(LocalTime.MAX);
+            System.out.println(end);
+        }
+//        var response =
+              return  repository.findDailySalesReport(start, end);
+//        return response.stream()
+//                .map(mapper::toResponse)
+//                .toList();
+
     }
 }

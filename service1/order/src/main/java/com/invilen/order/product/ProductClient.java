@@ -10,6 +10,9 @@ import java.util.List;
         url = "${application.config.pharmacy-url}"
 )
 public interface ProductClient {
-    @PostMapping
-    public List<PurchaseResponse> purchaseProduct(List<PurchaseRequest> request);
+    @PostMapping("/purchase")
+    public List<PurchaseResponse> purchasePharmacyProduct(List<PurchaseRequest> request);
+
+    @PostMapping("/bakeryPurchase")
+    public List<PurchaseResponse> purchaseBakeryProduct(List<PurchaseRequest> request);
 }

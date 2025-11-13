@@ -17,7 +17,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
                 COUNT(*) AS total_orders,
                 SUM(total_amount) AS total_sales,
                 AVG(total_amount) AS avg_order_value
-            FROM orders
+            FROM order_table
             WHERE created_date BETWEEN :startDate AND :endDate
             GROUP BY DATE(created_date)
             ORDER BY order_date ASC;
@@ -36,7 +36,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             FROM order_table
             GROUP BY DATE_TRUNC('week', created_date)
             ORDER BY month;
-            """)
+            """, nativeQuery = true)
     List<OrderReport> findWeeklySalesReport(
             @Param("startDate") LocalDateTime startDate,
             @Param("endDate") LocalDateTime endDate
@@ -52,7 +52,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             FROM order_table
             GROUP BY DATE_TRUNC('month', created_date)
             ORDER BY month;
-            """)
+            """, nativeQuery = true)
     List<OrderReport> findMonthlySalesReport();
 
     @Query(value = """
@@ -64,7 +64,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             FROM order_table
             GROUP BY DATE_TRUNC('month', created_date)
             ORDER BY month;
-            """)
+            """, nativeQuery = true)
     List<OrderReport> findYearlySalesReport();
 
 

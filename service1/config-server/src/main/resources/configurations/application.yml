@@ -1,6 +1,6 @@
 eureka:
   instance:
-    hostname: localhost
+    hostname: ${EUREKA_HOST:localhost}
   client:
     service-url:
       defaultZone: ${DISCOVERY_SERVER:http://localhost:8761/eureka}

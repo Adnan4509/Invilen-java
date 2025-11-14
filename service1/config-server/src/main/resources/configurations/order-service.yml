@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/orderdb
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/orderdb}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -11,7 +11,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   kafka:
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER:localhost:9092}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
@@ -22,6 +22,6 @@ server:
 
 application:
   config:
-    customer-url: http://localhost:8090/api/customer
-    bakery-url: http://localhost:8050/api/bakery
-    pharmacy-url: http://localhost:8020/api/pharmacy
+    customer-url: ${CUSTOMER_URL:http://localhost:8090/api/customer}
+    bakery-url: ${BAKERY_URL:http://localhost:8050/api/bakery}
+    pharmacy-url: ${PHARMACY_URL:http://localhost:8020/api/pharmacy}

@@ -25,3 +25,4 @@ application:
     customer-url: ${CUSTOMER_URL:http://localhost:8090/api/customer}
     bakery-url: ${BAKERY_URL:http://localhost:8050/api/bakery}
     pharmacy-url: ${PHARMACY_URL:http://localhost:8020/api/pharmacy}
+

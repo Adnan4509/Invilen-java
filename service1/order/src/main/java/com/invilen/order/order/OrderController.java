@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,8 +36,8 @@ public class OrderController {
     }
 
     @GetMapping("/dailyReport")
-    public List<OrderReport> dailySalesReport(@RequestParam(required = false) LocalDateTime start,
-                                              @RequestParam(required = false) LocalDateTime end) {
+    public List<OrderReport> dailySalesReport(@RequestParam(required = false) LocalDate start,
+                                              @RequestParam(required = false) LocalDate end) {
         return orderService.dailySalesReport(start, end);
     }
 

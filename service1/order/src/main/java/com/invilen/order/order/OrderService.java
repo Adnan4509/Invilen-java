@@ -70,13 +70,13 @@ public class OrderService {
         return order.getId();
     }
 
-    public List<OrderReport> dailySalesReport(LocalDateTime start, LocalDateTime end) {
+    public List<OrderReport> dailySalesReport(LocalDate start, LocalDate end) {
         if(start==null) {
-            start = LocalDate.now().atStartOfDay();
+            start = LocalDate.now();
             System.out.println(start);
         }
         if(end == null) {
-            end = LocalDate.now().atTime(LocalTime.MAX);
+            end = LocalDate.now();
             System.out.println(end);
         }
 //        var response =

@@ -2,10 +2,11 @@ package com.invilen.order.dto;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 
 public record OrderReport(
-        Date date,
+        Timestamp date,
         long totalOrders,
         BigDecimal totalSales,
         BigDecimal avgOrderValue

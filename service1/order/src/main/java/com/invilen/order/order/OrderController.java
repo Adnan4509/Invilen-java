@@ -41,4 +41,20 @@ public class OrderController {
         return orderService.dailySalesReport(start, end);
     }
 
+    @GetMapping("/weeklyReport")
+    public List<OrderReport> weeklySalesReport() {
+        return orderService.weeklySalesReport();
+    }
+
+    @GetMapping("/monthlyReport")
+    public List<OrderReport> monthlySalesReport() {
+        return orderService.monthlySalesReport();
+    }
+
+    @GetMapping("/yearlyReport")
+    public List<OrderReport> yearlySalesReport() {
+        return orderService.yearlySalesReport();
+    }
+
+
 }

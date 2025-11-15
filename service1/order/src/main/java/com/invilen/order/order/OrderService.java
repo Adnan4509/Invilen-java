@@ -79,11 +79,19 @@ public class OrderService {
             end = LocalDate.now();
             System.out.println(end);
         }
-//        var response =
-              return  repository.findDailySalesReport(start, end);
-//        return response.stream()
-//                .map(mapper::toResponse)
-//                .toList();
+        return  repository.findDailySalesReport(start, end);
+    }
 
+    public List<OrderReport> weeklySalesReport() {
+        return  repository.findWeeklySalesReport();
+
+    }
+
+    public List<OrderReport> monthlySalesReport() {
+        return repository.findMonthlySalesReport();
+    }
+
+    public List<OrderReport> yearlySalesReport() {
+        return repository.findYearlySalesReport();
     }
 }

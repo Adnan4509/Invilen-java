@@ -38,10 +38,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             GROUP BY DATE_TRUNC('week', created_date)
             ORDER BY month;
             """, nativeQuery = true)
-    List<OrderReport> findWeeklySalesReport(
-            @Param("startDate") LocalDateTime startDate,
-            @Param("endDate") LocalDateTime endDate
-    );
+    List<OrderReport> findWeeklySalesReport();
 
 
     @Query(value = """

@@ -1,5 +1,6 @@
 package com.invilen.order.order;
 
+import com.invilen.order.dto.DailyReport;
 import com.invilen.order.dto.OrderReport;
 import com.invilen.order.dto.OrderRequest;
 import com.invilen.order.dto.OrderResponse;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -36,7 +36,7 @@ public class OrderController {
     }
 
     @GetMapping("/dailyReport")
-    public List<OrderReport> dailySalesReport(@RequestParam(required = false) LocalDate start,
+    public List<DailyReport> dailySalesReport(@RequestParam(required = false) LocalDate start,
                                               @RequestParam(required = false) LocalDate end) {
         return orderService.dailySalesReport(start, end);
     }

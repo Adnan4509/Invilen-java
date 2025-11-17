@@ -1,5 +1,6 @@
 package com.invilen.order.order;
 
+import com.invilen.order.dto.DailyReport;
 import com.invilen.order.dto.OrderReport;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +24,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             GROUP BY DATE(created_date)
             ORDER BY order_date ASC;
     """, nativeQuery = true)
-    List<OrderReport> findDailySalesReport(
+    List<DailyReport> findDailySalesReport(
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate
     );

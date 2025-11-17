@@ -1,10 +1,7 @@
 package com.invilen.order.order;
 
 import com.invilen.order.customer.CustomerClient;
-import com.invilen.order.dto.OrderMapper;
-import com.invilen.order.dto.OrderReport;
-import com.invilen.order.dto.OrderRequest;
-import com.invilen.order.dto.OrderResponse;
+import com.invilen.order.dto.*;
 import com.invilen.order.kafka.NotificationProducer;
 import com.invilen.order.kafka.OrderConfirmation;
 import com.invilen.order.orderItem.OrderItemMapper;
@@ -70,13 +67,13 @@ public class OrderService {
         return order.getId();
     }
 
-    public List<OrderReport> dailySalesReport(LocalDate start, LocalDate end) {
+    public List<DailyReport> dailySalesReport(LocalDate start, LocalDate end) {
         if(start==null) {
-            start = LocalDate.now();
+            start = LocalDate.now().minusDays(1);
             System.out.println(start);
         }
         if(end == null) {
-            end = LocalDate.now();
+            end = LocalDate.now().plusDays(1);
             System.out.println(end);
         }
         return  repository.findDailySalesReport(start, end);

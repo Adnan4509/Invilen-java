@@ -33,7 +33,7 @@ public class EmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper =
                 new MimeMessageHelper(mimeMessage, MULTIPART_MODE_RELATED, UTF_8.name());
-        messageHelper.setFrom("contact@adnan.com");
+        messageHelper.setFrom("adnanmohd4509@gmail.com");
 
         final String templateName = "order-confirmation.html";
 

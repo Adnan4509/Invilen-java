@@ -18,20 +18,16 @@ spring:
         spring.json.trusted.packages: '*'
         spring.json.type.mapping: orderConfirmation:com.invilen.notification.dto.OrderConfirmation
   mail:
-    host: ${MAIL_HOST:localhost}
-    port: ${MAIL_PORT:1025}
-    username: ${MAIL_USERNAME:adnan}
-    password: ${MAIL_PASSWORD:adnan}
+    host: smtp.gmail.com
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
     properties:
       mail:
         smtp:
-          trust: "*"
-        auth: true
-        starttls:
-          enabled: true
-        connectiontimeout: 5000
-        timeout: 3000
-        writetimeout: 5000
+          auth: true
+          starttls:
+            enable: true
 
 server:
   port: 8040

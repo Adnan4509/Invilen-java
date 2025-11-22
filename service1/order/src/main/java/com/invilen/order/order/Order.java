@@ -2,6 +2,7 @@ package com.invilen.order.order;
 
 import com.invilen.order.orderItem.OrderItem;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,8 @@ public class Order {
     private BigDecimal totalAmount;
 //    @Enumerated(STRING)
 //    private PaymentMethod paymentMethod;
+    @NotNull(message = "Product type cannot be null")
+    private String productType;
     private String customerId;
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;

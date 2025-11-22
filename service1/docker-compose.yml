@@ -1,6 +1,6 @@
 services:
-  invilensData1:
-    container_name: invilens_postgres
+  postgres:
+    container_name: postgres
     image: postgres
     restart: unless-stopped
     environment:
@@ -12,21 +12,8 @@ services:
     ports:
       - 5433:5432
 
-
-  invilensPgadmin:
-    container_name: invilens_pgadmin
-    image: dpage/pgadmin4:latest
-    environment:
-      PGADMIN_DEFAULT_EMAIL: postgres@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    volumes:
-      - invilensPgadmin:/var/lib/pgadmin
-    ports:
-      - 5051:80
-    restart: unless-stopped
-
-  invilensMongodb:
-    container_name: invilens_mongodb
+  mongo:
+    container_name: mongo
     image: mongo
     ports:
       - 27018:27017
@@ -36,54 +23,39 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=adnan
       - MONGO_INITDB_ROOT_PASSWORD=adnan
 
-  invilensMongo-express:
-    container_name: invilens_mongo_express
-    image: mongo-express
-    restart: unless-stopped
-    ports:
-      - 8082:8081
-    environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=adnan
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=adnan
-      - ME_CONFIG_MONGODB_SERVER=invilensMongodb
-
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.0
-    container_name: invilens_zookeeper
-    ports:
-      - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: confluentinc/cp-kafka:7.3.0   # 👈 pin to version that supports Zookeeper
-    container_name: invilens_kafka
+    image: apache/kafka
+    container_name: kafka
     ports:
       - "9092:9092"
-    depends_on:
-      - zookeeper
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
 
-  mail-dev:
-    container_name: invilens_mail
-    image: maildev/maildev
-    ports:
-      - 1080:1080
-      - 1025:1025
+#  config-server:
+#    container_name: config-server
+#    image: config-server
+#    ports:
+#      - 8888:8888
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#      start_period: 15s
+#
+#  discovery-server:
+#    container_name: discovery-server
+#    image: discovery-server
+#    environment:
+#      - EUREKA_INSTANCE_HOSTNAME=discovery-server-1
+#      - CONFIG_SERVER_URL=http://config-server:8888
+#    ports:
+#      - "8761:8761"
+#    depends_on:
+#      config-server:
+#        condition: service_healthy
 
 volumes:
   invilensData1:
-    driver: local
-  invilensPgadmin:
     driver: local
   invilensMongodb:
     driver: local

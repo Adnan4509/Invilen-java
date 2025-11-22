@@ -2,7 +2,8 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-
+#ignore files
+/service1/config-server/src/main/resources/configurations/notification-service.yml
 ### Eclipse ###
 .apt_generated
 .classpath

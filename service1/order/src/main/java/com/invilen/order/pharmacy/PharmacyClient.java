@@ -4,7 +4,6 @@ import com.invilen.order.product.ProductClient;
 import com.invilen.order.product.PurchaseRequest;
 import com.invilen.order.product.PurchaseResponse;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;

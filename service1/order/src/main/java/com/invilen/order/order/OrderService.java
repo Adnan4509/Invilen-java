@@ -7,6 +7,7 @@ import com.invilen.order.kafka.OrderConfirmation;
 import com.invilen.order.orderItem.OrderItemMapper;
 import com.invilen.order.orderItem.OrderItemRepository;
 import com.invilen.order.product.ProductClient;
+import com.invilen.order.product.ProductServiceResolver;
 import com.invilen.order.product.PurchaseRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,7 +27,7 @@ public class OrderService {
     private final OrderRepository repository;
     private final OrderMapper mapper;
     private final CustomerClient customerClient;
-    private final ProductClient productClient;
+    private final ProductServiceResolver productServiceResolver;
     private final OrderItemRepository itemRepository;
     private final OrderItemMapper itemMapper;
     private final NotificationProducer notificationProducer;
@@ -47,7 +48,8 @@ public class OrderService {
         var customer = customerClient.findCustomerById(request.customerId());
         System.out.println(customer);
 //        step-2: product purchase from product ms
-        var purchasedProducts = productClient.purchasePharmacyProduct(request.products());
+        var client = productServiceResolver.getClient(request.productType());
+        var purchasedProducts = client.getProductById(request.products());
         System.out.println(purchasedProducts);
 //        step-3:save order
         var order = repository.save(mapper.toOrder(request));

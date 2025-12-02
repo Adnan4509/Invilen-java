@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -36,11 +37,12 @@ public class PharmacyService {
        return ResponseEntity.ok(mapper.toResponse(repository.findById(id).orElseThrow()));
     }
 
-    public List<PurchaseResponse> ProductPurchased(List<PurchaseRequest> request) {
+    public List<PurchaseResponse> ProductPurchased(List<PurchaseRequest> request)  {
         var productIds = request
                 .stream()
                 .map(PurchaseRequest::productId)
                 .toList();
+        someErrorMessage();
         var storedProducts = repository.findAllById(productIds)
                 .stream()
                 .sorted(Comparator.comparing(Medicine::getId))
@@ -65,5 +67,9 @@ public class PharmacyService {
             purchasedProducts.add(mapper.toPurchaseResponse(product, requestedProduct.quantity()));
         }
         return purchasedProducts;
+    }
+
+    private void someErrorMessage() {
+        throw new ArithmeticException("Something went wrong");
     }
 }

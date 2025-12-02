@@ -39,9 +39,9 @@ public class BakeryService {
                 .map(PurchaseRequest::productId)
                 .toList();
         var storedProducts = bakeryRepository.findAllById(productsIds)
-                .stream()
-                .sorted(Comparator.comparing(Bakery::getId))
-                .toList();
+                    .stream()
+                    .sorted(Comparator.comparing(Bakery::getId))
+                    .toList();
         if (productsIds.size() != storedProducts.size()) {
             throw new ProductPurchaseException("One or more products does not exists");
         }

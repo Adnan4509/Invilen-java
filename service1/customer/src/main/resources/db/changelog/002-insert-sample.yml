@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-sample-customer
+      author: adnan
+      changes:
+        - insert:
+            collectionName: customer
+            documents:
+              - firstname: "Md"
+                lastname: "Adnan"
+                email: "adnan@gmail.com"
+                address:
+                  street: "Road 1"
+                  houseNumber: "2-3-456"
+                  zipcode: "85520"

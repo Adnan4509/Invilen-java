@@ -15,4 +15,11 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(exp.getMessage());
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handle(Exception exp) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_GATEWAY)
+                .body("Something went wrong");
+    }
 }

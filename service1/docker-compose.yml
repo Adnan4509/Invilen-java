@@ -6,7 +6,6 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: invilensdb
     volumes:
       - invilensData1:/var/lib/postgres/data
     ports:
@@ -26,37 +25,36 @@ services:
 
   kafka:
     image: apache/kafka
-
     ports:
       - "9092:9092"
 
-  config-server:
-    build:
-      context: ./config-server
-    image: config-server
-    container_name: config-server
-    ports:
-      - 8888:8888
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 15s
-
-  discovery-server:
-    build:
-      context: ./discovery-server
-    container_name: discovery-server
-    image: discovery-server
-    environment:
-      - EUREKA_INSTANCE_HOSTNAME=discovery-server-1
-      - CONFIG_SERVER_URL=http://config-server:8888
-    ports:
-      - "8761:8761"
-    depends_on:
-      config-server:
-        condition: service_healthy
+#  config-server:
+#    build:
+#      context: ./config-server
+#    image: config-server
+#    container_name: config-server
+#    ports:
+#      - 8888:8888
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#      start_period: 15s
+#
+#  discovery-server:
+#    build:
+#      context: ./discovery-server
+#    container_name: discovery-server
+#    image: discovery-server
+#    environment:
+#      - EUREKA_INSTANCE_HOSTNAME=discovery-server-1
+#      - CONFIG_SERVER_URL=http://config-server:8888
+#    ports:
+#      - "8761:8761"
+#    depends_on:
+#      config-server:
+#        condition: service_healthy
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.4.7

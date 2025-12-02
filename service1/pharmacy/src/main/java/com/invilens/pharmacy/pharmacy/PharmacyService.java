@@ -1,6 +1,7 @@
 package com.invilens.pharmacy.pharmacy;
 
 import com.invilens.pharmacy.dto.*;
+import com.invilens.pharmacy.exception.ProductNotFoundException;
 import com.invilens.pharmacy.exception.ProductPurchaseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +33,9 @@ public class PharmacyService {
 
     public ResponseEntity<PharmacyResponse> findByid(Integer id) {
 
-       return ResponseEntity.ok(mapper.toResponse(repository.findById(id).orElseThrow()));
+       return ResponseEntity.ok(Mapper.toResponse(repository.findById(id).orElseThrow(
+               () ->  new ProductNotFoundException("No product found with the provided Id")
+       )));
     }
 
     public List<PurchaseResponse> ProductPurchased(List<PurchaseRequest> request)  {
@@ -42,13 +43,16 @@ public class PharmacyService {
                 .stream()
                 .map(PurchaseRequest::productId)
                 .toList();
-        someErrorMessage();
         var storedProducts = repository.findAllById(productIds)
                 .stream()
                 .sorted(Comparator.comparing(Medicine::getId))
                 .toList();
+        Set<Integer> uniqueIds = new HashSet<>(productIds);
+        if (uniqueIds.size() != productIds.size()) {
+            throw new ProductPurchaseException("Duplicate entry not allowed for product Ids");
+        }
         if (productIds.size() != storedProducts.size()) {
-            throw new ProductPurchaseException("One or more products does not exist");
+            throw new ProductNotFoundException("One or more products does not exist");
         }
         var sortedRequest = request
                 .stream()
@@ -69,7 +73,4 @@ public class PharmacyService {
         return purchasedProducts;
     }
 
-    private void someErrorMessage() {
-        throw new ArithmeticException("Something went wrong");
-    }
 }

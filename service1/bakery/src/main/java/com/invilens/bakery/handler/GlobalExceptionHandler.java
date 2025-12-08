@@ -1,5 +1,6 @@
 package com.invilens.bakery.handler;
 
+import com.invilens.bakery.exception.ProductNotFoundException;
 import com.invilens.bakery.exception.ProductPurchaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProductPurchaseException.class)
     public ResponseEntity<String> handle(ProductPurchaseException exp) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(exp.getMessage());
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<String> handle(ProductNotFoundException exp) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(exp.getMessage());

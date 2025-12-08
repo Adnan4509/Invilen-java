@@ -35,4 +35,10 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse(errors));
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handle(Exception e) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_GATEWAY)
+                .body("Something went wrong");
+    }
 }

@@ -1,6 +1,7 @@
 package com.invilens.bakery.bakery;
 
 import com.invilens.bakery.dto.*;
+import com.invilens.bakery.exception.ProductNotFoundException;
 import com.invilens.bakery.exception.ProductPurchaseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,9 @@ public class BakeryService {
     }
 
     public BakeryResponse findById(Integer id) {
-        return Mapper.toResponse(bakeryRepository.findById(id).orElseThrow());
+        return Mapper.toResponse(bakeryRepository.findById(id).orElseThrow(
+                () -> new ProductNotFoundException("Product not found with the provided id")
+        ));
     }
 
     public List<PurchaseResponse> purchaseProduct(List<PurchaseRequest> request) {

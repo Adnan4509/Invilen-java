@@ -3,7 +3,9 @@ package com.invilen.order.customer;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-//import com.adnan.ecommerce.customer
+
+import java.util.Optional;
+
 @FeignClient(
         name = "customer-service",
         url = "${application.config.customer-url}"
@@ -11,6 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface CustomerClient {
 
     @GetMapping("/{customerId}")
-    public CustomerResponse findCustomerById(@PathVariable String customerId);
+     Optional<CustomerResponse> findCustomerById(@PathVariable String customerId);
 
 }

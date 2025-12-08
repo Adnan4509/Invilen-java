@@ -2,11 +2,11 @@ package com.invilen.order.order;
 
 import com.invilen.order.customer.CustomerClient;
 import com.invilen.order.dto.*;
+import com.invilen.order.exception.BusinessException;
 import com.invilen.order.kafka.NotificationProducer;
 import com.invilen.order.kafka.OrderConfirmation;
 import com.invilen.order.orderItem.OrderItemMapper;
 import com.invilen.order.orderItem.OrderItemRepository;
-import com.invilen.order.product.ProductClient;
 import com.invilen.order.product.ProductServiceResolver;
 import com.invilen.order.product.PurchaseRequest;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -45,7 +43,8 @@ public class OrderService {
 
     public Integer createOrder(OrderRequest request) {
 //        step-1: customer data
-        var customer = customerClient.findCustomerById(request.customerId());
+        var customer = customerClient.findCustomerById(request.customerId())
+                        .orElseThrow(() -> new BusinessException("Cannot find customer with the provided ID"));
         System.out.println(customer);
 //        step-2: product purchase from product ms
         var client = productServiceResolver.getClient(request.productType());
@@ -56,7 +55,7 @@ public class OrderService {
         System.out.println(order);
 //        step-4: save order items
         for(PurchaseRequest purchaseRequest: request.products()) {
-            var orderItem = itemRepository.save(itemMapper.toOrderItem(purchaseRequest, order));
+            itemRepository.save(itemMapper.toOrderItem(purchaseRequest, order));
         }
 //        step-5: send order confirmation
         var orderConfirmation = new OrderConfirmation(

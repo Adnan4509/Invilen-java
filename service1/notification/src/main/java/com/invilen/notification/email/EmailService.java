@@ -27,7 +27,6 @@ public class EmailService {
 
     @Async
     public void sendOrderSuccess(OrderConfirmation orderConfirmation) throws MessagingException {
-        System.out.println("Sending Email");
         var destinationEmail = orderConfirmation.customer().email();
         var customerName = orderConfirmation.customer().firstName() + " " + orderConfirmation.customer().lastName();
         MimeMessage mimeMessage = mailSender.createMimeMessage();

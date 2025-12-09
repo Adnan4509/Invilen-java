@@ -3,6 +3,7 @@ package com.invilen.order.order;
 import com.invilen.order.customer.CustomerClient;
 import com.invilen.order.dto.*;
 import com.invilen.order.exception.BusinessException;
+import com.invilen.order.exception.ProductNotFoundException;
 import com.invilen.order.kafka.NotificationProducer;
 import com.invilen.order.kafka.OrderConfirmation;
 import com.invilen.order.orderItem.OrderItemMapper;
@@ -38,21 +39,20 @@ public class OrderService {
     }
 
     public OrderResponse findById(Integer orderId) {
-        return mapper.toResponse(repository.findById(orderId).orElseThrow());
+        return mapper.toResponse(repository.findById(orderId).orElseThrow(
+                () -> new ProductNotFoundException("Product not found with the provided ID")
+        ));
     }
 
     public Integer createOrder(OrderRequest request) {
 //        step-1: customer data
         var customer = customerClient.findCustomerById(request.customerId())
                         .orElseThrow(() -> new BusinessException("Cannot find customer with the provided ID"));
-        System.out.println(customer);
 //        step-2: product purchase from product ms
         var client = productServiceResolver.getClient(request.productType());
         var purchasedProducts = client.getProductById(request.products());
-        System.out.println(purchasedProducts);
 //        step-3:save order
         var order = repository.save(mapper.toOrder(request));
-        System.out.println(order);
 //        step-4: save order items
         for(PurchaseRequest purchaseRequest: request.products()) {
             itemRepository.save(itemMapper.toOrderItem(purchaseRequest, order));

@@ -1,5 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: db/changelog/001-create-customer.yml
-  - include:
-      file: db/changelog/002-insert-sample.yml

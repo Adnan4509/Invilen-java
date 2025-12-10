@@ -29,14 +29,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handle(DataAccessException e) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body("Database error");
+                .body("Database error" + e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGenericException(Exception e) {
         return ResponseEntity
                 .status(HttpStatus.BAD_GATEWAY)
-                .body("Something Went Wrong");
+                .body("SOMETHING WENT WRONG!!! " + e.getMessage());
     }
 
 

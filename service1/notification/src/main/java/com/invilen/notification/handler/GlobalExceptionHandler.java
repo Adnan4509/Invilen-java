@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handle(Exception e) {
         return ResponseEntity
                 .status(HttpStatus.BAD_GATEWAY)
-                .body(e.getMessage());
+                .body("SOMETHING WENT WRONG!!! " + e.getMessage());
     }
 
 

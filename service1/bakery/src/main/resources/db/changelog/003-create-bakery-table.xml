@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="bakery-001" author="adnan">
+    <changeSet id="003" author="adnan">
 
         <createTable tableName="bakery">
             <column name="id" type="serial">
@@ -20,7 +20,7 @@
 
             <column name="weight" type="varchar(128)"/>
 
-            <column name="available_quantity" type="numeric(10,2)" defaultValueNumeric="0"/>
+            <column name="available_quantity" type="float8"/>
 
             <column name="price" type="numeric(10,2)">
                 <constraints nullable="false"/>

@@ -6,7 +6,7 @@
             http://www.liquibase.org/xml/ns/dbchangelog
             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="bakery-002" author="adnan">
+    <changeSet id="004" author="adnan">
 
         <!-- Chocolate Cake (Category ID = 1) -->
         <insert tableName="bakery">

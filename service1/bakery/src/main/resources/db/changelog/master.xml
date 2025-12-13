@@ -7,7 +7,9 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <!-- include per-feature changelogs -->
-    <include file="category/001-create-category-table.xml"/>
-    <include file="bakery/002-create-bakery-table.xml"/>
-    <include file="bakery/003-insert-data.xml"/>
+<!--    <includeAll path="db.changelog" relativeToChangelogFile="true"/>-->
+    <include file="001-create-category-table.xml" relativeToChangelogFile="true"/>
+    <include file="002-insert-category-data.xml" relativeToChangelogFile="true"/>
+    <include file="003-create-bakery-table.xml" relativeToChangelogFile="true"/>
+    <include file="004-insert-data.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

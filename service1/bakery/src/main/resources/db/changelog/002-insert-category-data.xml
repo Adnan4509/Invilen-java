@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet id="002" author="adnan">
+
+        <insert tableName="category">
+            <column name="name" value="Cakes"/>
+            <column name="description" value="All types of cakes"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Cookies"/>
+            <column name="description" value="Freshly baked cookies"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Breads"/>
+            <column name="description" value="Loaves, buns and breads"/>
+        </insert>
+
+        <rollback>
+            <delete tableName="category">
+                <where>name in ('Cakes','Cookies','Breads')</where>
+            </delete>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>

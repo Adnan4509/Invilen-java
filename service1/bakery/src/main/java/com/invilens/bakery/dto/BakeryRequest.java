@@ -1,6 +1,6 @@
 package com.invilens.bakery.dto;
 
-import com.invilens.bakery.bakery.Category;
+import com.invilens.bakery.Category;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.math.BigDecimal;

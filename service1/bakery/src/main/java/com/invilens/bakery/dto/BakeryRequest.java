@@ -2,6 +2,7 @@ package com.invilens.bakery.dto;
 
 import com.invilens.bakery.bakery.Category;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
@@ -11,11 +12,11 @@ public record BakeryRequest(
         @NotEmpty(message = "name cannot be empty")
         String name,
         String weight,
-        @NotEmpty(message = "quantity cannot be empty")
+        @NotNull(message = "quantity cannot be empty")
         Double Quantity,
-        @NotEmpty(message = "price cannot be empty")
+        @NotNull(message = "price cannot be empty")
         BigDecimal price,
-        @NotEmpty(message = "category cannot be empty")
+        @NotNull(message = "category cannot be empty")
         Category category
 ) {
 }

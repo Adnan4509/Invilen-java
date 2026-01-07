@@ -1,7 +1,6 @@
 package com.invilens.bakery.dto;
 
-import com.invilens.bakery.bakery.Bakery;
-import jakarta.validation.constraints.NotNull;
+import com.invilens.bakery.Bakery;
 
 public class Mapper {
     public static Bakery toEntity(BakeryRequest request) {

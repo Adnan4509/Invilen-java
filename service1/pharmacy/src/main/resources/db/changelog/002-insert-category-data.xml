@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <changeSet id="002" author="adnan">
+
+        <insert tableName="category">
+            <column name="name" value="Pain Relief"/>
+            <column name="description" value="Medicines used to relieve pain and inflammation"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Antibiotics"/>
+            <column name="description" value="Used to treat bacterial infections"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Vitamins &amp; Supplements"/>
+            <column name="description" value="Boost general health and immunity"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Cold &amp; Flu"/>
+            <column name="description" value="Treat symptoms of cold, cough, and flu"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Digestive Care"/>
+            <column name="description" value="For acidity, indigestion, and stomach issues"/>
+        </insert>
+
+        <rollback>
+            <delete tableName="category">
+                <where>name in ('Pain Relief','Antibiotics','Vitamins &amp; Supplements','Cold &amp; Flu','Digestive Care')</where>
+            </delete>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>

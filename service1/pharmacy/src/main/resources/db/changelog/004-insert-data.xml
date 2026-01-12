@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="004" author="adnan">
+
+        <!-- Chocolate Cake (Category ID = 1) -->
+        <insert tableName="bakery">
+            <column name="name" value="Chocolate Cake"/>
+            <column name="description" value="Rich creamy chocolate layered cake"/>
+            <column name="weight" value="1kg"/>
+            <column name="available_quantity" valueNumeric="15"/>
+            <column name="price" valueNumeric="650.00"/>
+            <column name="category_id" valueNumeric="1"/>
+        </insert>
+
+        <!-- Butter Cookies (Category ID = 2) -->
+        <insert tableName="bakery">
+            <column name="name" value="Butter Cookies"/>
+            <column name="description" value="Homemade-style crunchy butter cookies"/>
+            <column name="weight" value="250g"/>
+            <column name="available_quantity" valueNumeric="40"/>
+            <column name="price" valueNumeric="120.00"/>
+            <column name="category_id" valueNumeric="2"/>
+        </insert>
+
+        <!-- Whole Wheat Bread (Category ID = 3) -->
+        <insert tableName="bakery">
+            <column name="name" value="Whole Wheat Bread"/>
+            <column name="description" value="Healthy fiber-rich wheat bread"/>
+            <column name="weight" value="400g"/>
+            <column name="available_quantity" valueNumeric="30"/>
+            <column name="price" valueNumeric="55.00"/>
+            <column name="category_id" valueNumeric="3"/>
+        </insert>
+
+        <rollback>
+            <delete tableName="bakery"/>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>
